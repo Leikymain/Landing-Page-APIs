@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatiza tu PYME con IA | Jorge Lago</title>
+    <meta
+      name="description"
+      content="5 herramientas de IA listas para automatizar tu negocio. Chatbots, procesamiento de documentos, análisis y más. Desde 300€."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hover-lift {
+        transition: transform 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-8px);
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header/Nav -->
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <span class="text-2xl font-bold gradient-text">IA para PYMEs</span>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="#demos"
+              class="text-gray-700 hover:text-purple-600 transition"
+              >Demos</a
+            >
+            <a
+              href="#precios"
+              class="text-gray-700 hover:text-purple-600 transition"
+              >Precios</a
+            >
+            <a
+              href="#contacto"
+              class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+              >Agendar Demo</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white pt-32 pb-20 px-4">
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="mb-8 floating">
+          <span
+            class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold"
+          >
+            ⚡ Listo en 48 horas
+          </span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+          Automatiza tu PYME<br />con IA en 48 horas
+        </h1>
+        <p class="text-xl md:text-2xl mb-10 text-white/90 max-w-3xl mx-auto">
+          5 herramientas de Inteligencia Artificial listas para usar.<br />
+          Sin instalación. Sin complicaciones. Desde 300€.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#demos"
+            class="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition shadow-xl"
+          >
+            Ver Demos en Vivo →
+          </a>
+          <a
+            href="#contacto"
+            class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-purple-600 transition"
+          >
+            Agendar Consulta Gratis
+          </a>
+        </div>
+        <div class="mt-12 text-sm text-white/80">
+          ✓ Sin permanencia ✓ 7 días de prueba ✓ Soporte incluido
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-white px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+          ¿Tu equipo pierde horas en tareas repetitivas?
+        </h2>
+        <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+          Las PYMEs pierden 15-20 horas/semana en tareas que la IA puede hacer
+          en segundos.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition"
+          >
+            <div class="text-5xl mb-4">📱</div>
+            <h3 class="text-xl font-bold mb-2">Responder WhatsApp 24/7</h3>
+            <p class="text-gray-600">
+              Clientes esperan respuestas inmediatas. Tú pierdes horas
+              contestando lo mismo.
+            </p>
+          </div>
+          <div
+            class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition"
+          >
+            <div class="text-5xl mb-4">📄</div>
+            <h3 class="text-xl font-bold mb-2">
+              Procesar facturas manualmente
+            </h3>
+            <p class="text-gray-600">
+              Entrada manual de datos en facturas/CVs. Lento y con errores.
+            </p>
+          </div>
+          <div
+            class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition"
+          >
+            <div class="text-5xl mb-4">📊</div>
+            <h3 class="text-xl font-bold mb-2">Analizar datos sin insights</h3>
+            <p class="text-gray-600">
+              Tienes datos pero no sabes qué significan ni qué acciones tomar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demos Section -->
+    <section id="demos" class="py-20 bg-gray-50 px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+          5 Herramientas. 1 Objetivo:
+          <span class="gradient-text">Ahorrarte Tiempo</span>
+        </h2>
+        <p class="text-xl text-gray-600 text-center mb-16">
+          Elige la que necesites. O combínalas todas.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Demo 1: Chatbot -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover-lift hover:shadow-2xl"
+          >
+            <div class="text-4xl mb-4">🤖</div>
+            <h3 class="text-2xl font-bold mb-3">Chatbot IA Personalizado</h3>
+            <p class="text-gray-600 mb-4">
+              Atención al cliente 24/7 en tu web. Responde preguntas, capta
+              leads automáticamente.
+            </p>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="text-3xl font-bold text-purple-600">400€</span>
+              <span class="text-gray-500">+ 100€/mes</span>
+            </div>
+            <ul class="text-sm text-gray-600 mb-6 space-y-2">
+              <li>✓ Ahorra 10-15h/semana</li>
+              <li>✓ API REST integrable</li>
+              <li>✓ Listo en 2 días</li>
+            </ul>
+            <a
+              href="#"
+              class="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            >
+              Ver Demo Live →
+            </a>
+          </div>
+
+          <!-- Demo 2: Document Processor -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover-lift hover:shadow-2xl"
+          >
+            <div class="text-4xl mb-4">📄</div>
+            <h3 class="text-2xl font-bold mb-3">Procesador de Documentos</h3>
+            <p class="text-gray-600 mb-4">
+              Extrae datos de facturas, CVs y PDFs automáticamente. Ahorra 90%
+              del tiempo.
+            </p>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="text-3xl font-bold text-purple-600">500€</span>
+              <span class="text-gray-500">+ 120€/mes</span>
+            </div>
+            <ul class="text-sm text-gray-600 mb-6 space-y-2">
+              <li>✓ Para gestorías y RRHH</li>
+              <li>✓ Procesa 100+ docs/día</li>
+              <li>✓ Datos estructurados JSON</li>
+            </ul>
+            <a
+              href="#"
+              class="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            >
+              Ver Demo Live →
+            </a>
+          </div>
+
+          <!-- Demo 3: Analytics Dashboard -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover-lift hover:shadow-2xl"
+          >
+            <div class="text-4xl mb-4">📊</div>
+            <h3 class="text-2xl font-bold mb-3">Dashboard de Análisis IA</h3>
+            <p class="text-gray-600 mb-4">
+              Sube tu CSV, obtén insights automáticos. Gráficos y
+              recomendaciones en segundos.
+            </p>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="text-3xl font-bold text-purple-600">600€</span>
+              <span class="text-gray-500">+ 140€/mes</span>
+            </div>
+            <ul class="text-sm text-gray-600 mb-6 space-y-2">
+              <li>✓ Sin conocimientos técnicos</li>
+              <li>✓ Visualizaciones automáticas</li>
+              <li>✓ Predicciones incluidas</li>
+            </ul>
+            <a
+              href="#"
+              class="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            >
+              Ver Demo Live →
+            </a>
+          </div>
+
+          <!-- Demo 4: Prediction System -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover-lift hover:shadow-2xl"
+          >
+            <div class="text-4xl mb-4">🔮</div>
+            <h3 class="text-2xl font-bold mb-3">Sistema de Predicciones</h3>
+            <p class="text-gray-600 mb-4">
+              Predice ventas, inventario y demanda. Toma decisiones con datos,
+              no corazonadas.
+            </p>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="text-3xl font-bold text-purple-600">600€</span>
+              <span class="text-gray-500">+ 140€/mes</span>
+            </div>
+            <ul class="text-sm text-gray-600 mb-6 space-y-2">
+              <li>✓ Reduce inventario 30%</li>
+              <li>✓ Optimiza personal</li>
+              <li>✓ ROI en 2 meses</li>
+            </ul>
+            <a
+              href="#"
+              class="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            >
+              Próximamente
+            </a>
+          </div>
+
+          <!-- Demo 5: WhatsApp Bot -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg hover-lift hover:shadow-2xl border-4 border-purple-500 relative"
+          >
+            <div
+              class="absolute -top-4 right-4 bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold"
+            >
+              MÁS POPULAR
+            </div>
+            <div class="text-4xl mb-4">💬</div>
+            <h3 class="text-2xl font-bold mb-3">Bot de WhatsApp IA</h3>
+            <p class="text-gray-600 mb-4">
+              Responde automáticamente en WhatsApp Business. Disponible 24/7 sin
+              contratar a nadie.
+            </p>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="text-3xl font-bold text-purple-600">500€</span>
+              <span class="text-gray-500">+ 150€/mes</span>
+            </div>
+            <ul class="text-sm text-gray-600 mb-6 space-y-2">
+              <li>✓ Ahorra 15-20h/semana</li>
+              <li>✓ Para restaurantes/tiendas</li>
+              <li>✓ Escala a humano si necesario</li>
+            </ul>
+            <a
+              href="#"
+              class="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
+            >
+              Ver Demo Live →
+            </a>
+          </div>
+
+          <!-- Bundle Option -->
+          <div
+            class="bg-gradient-to-br from-purple-600 to-indigo-600 text-white rounded-2xl p-8 shadow-lg hover-lift"
+          >
+            <div class="text-4xl mb-4">🎁</div>
+            <h3 class="text-2xl font-bold mb-3">Paquete Completo</h3>
+            <p class="mb-4">
+              Las 5 herramientas integradas. Automatización total.
+            </p>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="text-3xl font-bold">1200€</span>
+              <span class="text-sm line-through opacity-70">2600€</span>
+            </div>
+            <ul class="text-sm mb-6 space-y-2 opacity-90">
+              <li>✓ Ahorro 54% vs individual</li>
+              <li>✓ Soporte prioritario</li>
+              <li>✓ Actualizaciones gratis</li>
+            </ul>
+            <a
+              href="#contacto"
+              class="block w-full bg-white text-purple-600 text-center py-3 rounded-lg font-semibold hover:scale-105 transition"
+            >
+              Solicitar Propuesta
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20 bg-white px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+          Cómo funciona
+        </h2>
+        <div class="grid md:grid-cols-3 gap-12">
+          <div class="text-center">
+            <div
+              class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <span class="text-3xl font-bold text-purple-600">1</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Agenda Demo</h3>
+            <p class="text-gray-600">
+              15 minutos por videollamada. Te muestro las demos y resuelvo
+              dudas.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <span class="text-3xl font-bold text-purple-600">2</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Personalizamos</h3>
+            <p class="text-gray-600">
+              Adaptamos la herramienta a tu negocio. En 2-3 días está lista.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <span class="text-3xl font-bold text-purple-600">3</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Listo para Usar</h3>
+            <p class="text-gray-600">
+              Training incluido. Empiezas a ahorrar tiempo inmediatamente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-20 bg-gray-50 px-4">
+      <div class="max-w-7xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12">
+          Tecnología de confianza
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl mb-3">🧠</div>
+            <p class="text-gray-800 font-semibold mb-2">
+              Claude AI (Anthropic)
+            </p>
+            <p class="text-sm text-gray-600">Misma IA que usan Fortune 500</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl mb-3">⚡</div>
+            <p class="text-gray-800 font-semibold mb-2">FastAPI + React</p>
+            <p class="text-sm text-gray-600">Stack moderno y escalable</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl mb-3">🔒</div>
+            <p class="text-gray-800 font-semibold mb-2">Datos seguros</p>
+            <p class="text-sm text-gray-600">Cifrado end-to-end</p>
+          </div>
+        </div>
+        <div class="mt-12 text-lg text-gray-600">
+          <p class="font-semibold mb-2">Desarrollado por Jorge Lago Campos</p>
+          <p>Desarrollador Full Stack con 2 años de experiencia</p>
+          <a
+            href="https://linkedin.com/in/jorge-lago-campos"
+            target="_blank"
+            class="text-purple-600 hover:underline"
+          >
+            Ver perfil en LinkedIn →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precios" class="py-20 bg-white px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+          Precios transparentes
+        </h2>
+        <p class="text-xl text-gray-600 text-center mb-16">
+          Sin sorpresas. Sin letra pequeña.
+        </p>
+        <div class="bg-gray-50 rounded-2xl p-8 md:p-12">
+          <div class="grid md:grid-cols-3 gap-8 text-center mb-8">
+            <div>
+              <h3 class="text-xl font-bold mb-2">Setup Inicial</h3>
+              <p class="text-4xl font-bold text-purple-600 mb-2">300-700€</p>
+              <p class="text-sm text-gray-600">Pago único</p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Mantenimiento</h3>
+              <p class="text-4xl font-bold text-purple-600 mb-2">80-200€</p>
+              <p class="text-sm text-gray-600">Por mes</p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">ROI Medio</h3>
+              <p class="text-4xl font-bold text-green-600 mb-2">1-2 meses</p>
+              <p class="text-sm text-gray-600">Recuperas inversión</p>
+            </div>
+          </div>
+          <div class="border-t border-gray-200 pt-8">
+            <h4 class="font-bold mb-4 text-lg">¿Qué incluye?</h4>
+            <ul class="grid md:grid-cols-2 gap-4 text-left">
+              <li class="flex items-start gap-2">
+                <span class="text-green-500 font-bold">✓</span>
+                <span>Personalización completa para tu negocio</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-500 font-bold">✓</span>
+                <span>2 semanas de ajustes gratis</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-500 font-bold">✓</span>
+                <span>Training de tu equipo incluido</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-500 font-bold">✓</span>
+                <span>Soporte técnico prioritario</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-500 font-bold">✓</span>
+                <span>Hosting y mantenimiento incluidos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-500 font-bold">✓</span>
+                <span>Sin permanencia, cancela cuando quieras</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-gray-50 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+          Preguntas frecuentes
+        </h2>
+        <div class="space-y-6" x-data="{ openFaq: null }">
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <button
+              @click="openFaq = openFaq === 1 ? null : 1"
+              class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            >
+              <span class="font-bold text-lg"
+                >¿Cuánto tarda la implementación?</span
+              >
+              <span class="text-2xl" x-text="openFaq === 1 ? '−' : '+'"></span>
+            </button>
+            <div x-show="openFaq === 1" x-collapse class="px-8 pb-6">
+              <p class="text-gray-600">
+                Entre 2 y 5 días dependiendo de la demo elegida. El WhatsApp Bot
+                y Chatbot son los más rápidos (2-3 días). Dashboard Analytics y
+                Prediction System pueden tardar 4-5 días si requieren
+                integraciones personalizadas.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <button
+              @click="openFaq = openFaq === 2 ? null : 2"
+              class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            >
+              <span class="font-bold text-lg"
+                >¿Necesito conocimientos técnicos?</span
+              >
+              <span class="text-2xl" x-text="openFaq === 2 ? '−' : '+'"></span>
+            </button>
+            <div x-show="openFaq === 2" x-collapse class="px-8 pb-6">
+              <p class="text-gray-600">
+                No. Nosotros nos encargamos de toda la configuración técnica. Tú
+                solo necesitas darnos la información de tu negocio (horarios,
+                productos, precios, etc.). Incluimos training completo para tu
+                equipo.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <button
+              @click="openFaq = openFaq === 3 ? null : 3"
+              class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            >
+              <span class="font-bold text-lg"
+                >¿Funciona con mi sistema actual?</span
+              >
+              <span class="text-2xl" x-text="openFaq === 3 ? '−' : '+'"></span>
+            </button>
+            <div x-show="openFaq === 3" x-collapse class="px-8 pb-6">
+              <p class="text-gray-600">
+                Sí. Todas nuestras herramientas se integran vía API REST, lo que
+                las hace compatibles con prácticamente cualquier software
+                moderno. Si usas Sage, Holded, WordPress, Shopify, etc., podemos
+                integrarlo.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <button
+              @click="openFaq = openFaq === 4 ? null : 4"
+              class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            >
+              <span class="font-bold text-lg"
+                >¿Qué pasa si no me convence?</span
+              >
+              <span class="text-2xl" x-text="openFaq === 4 ? '−' : '+'"></span>
+            </button>
+            <div x-show="openFaq === 4" x-collapse class="px-8 pb-6">
+              <p class="text-gray-600">
+                Ofrecemos 7 días de prueba. Si dentro de ese período decides que
+                no es para ti, te devolvemos el 100% del setup inicial. Sin
+                preguntas. También puedes cancelar el servicio mensual cuando
+                quieras sin penalización.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <button
+              @click="openFaq = openFaq === 5 ? null : 5"
+              class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            >
+              <span class="font-bold text-lg"
+                >¿Los datos de mis clientes están seguros?</span
+              >
+              <span class="text-2xl" x-text="openFaq === 5 ? '−' : '+'"></span>
+            </button>
+            <div x-show="openFaq === 5" x-collapse class="px-8 pb-6">
+              <p class="text-gray-600">
+                Absolutamente. Usamos cifrado end-to-end, los datos se procesan
+                en servidores seguros en Europa (GDPR compliant), y nunca
+                compartimos información con terceros. Cumplimos con todas las
+                normativas de protección de datos españolas y europeas.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <button
+              @click="openFaq = openFaq === 6 ? null : 6"
+              class="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            >
+              <span class="font-bold text-lg"
+                >¿Puedo probar una demo antes de comprar?</span
+              >
+              <span class="text-2xl" x-text="openFaq === 6 ? '−' : '+'"></span>
+            </button>
+            <div x-show="openFaq === 6" x-collapse class="px-8 pb-6">
+              <p class="text-gray-600">
+                ¡Por supuesto! Haz clic en "Ver Demo Live" en cualquiera de las
+                herramientas arriba. También puedes agendar una videollamada de
+                15 minutos donde te mostramos todo en detalle y respondemos tus
+                preguntas específicas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contacto" class="py-20 gradient-bg text-white px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          Automatiza tu negocio esta semana
+        </h2>
+        <p class="text-xl mb-12 text-white/90">
+          Agenda una demo gratuita de 15 minutos. Sin compromiso.
+        </p>
+
+        <form
+          class="max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-8"
+          action="https://formspree.io/f/mblpnpkb"
+          method="POST"
+        >
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Tu nombre"
+              required
+              class="w-full px-6 py-4 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              class="w-full px-6 py-4 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            />
+          </div>
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Teléfono (opcional)"
+              class="w-full px-6 py-4 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            />
+            <select
+              name="business_type"
+              required
+              class="w-full px-6 py-4 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            >
+              <option value="">Tipo de negocio</option>
+              <option value="restaurante">Restaurante</option>
+              <option value="tienda">Tienda/Ecommerce</option>
+              <option value="gestoría">Gestoría/Asesoría</option>
+              <option value="inmobiliaria">Inmobiliaria</option>
+              <option value="servicios">Servicios</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <select
+            name="demo_interest"
+            required
+            class="w-full px-6 py-4 rounded-xl bg-white text-gray-800 mb-6 focus:outline-none focus:ring-2 focus:ring-purple-400"
+          >
+            <option value="">¿Qué demo te interesa?</option>
+            <option value="whatsapp">WhatsApp Bot</option>
+            <option value="chatbot">Chatbot Web</option>
+            <option value="documents">Procesador Documentos</option>
+            <option value="analytics">Dashboard Analytics</option>
+            <option value="predictions">Sistema Predicciones</option>
+            <option value="all">Todas / No estoy seguro</option>
+          </select>
+          <button
+            type="submit"
+            class="w-full bg-white text-purple-600 px-8 py-5 rounded-xl font-bold text-lg hover:scale-105 transition shadow-xl"
+          >
+            Agendar Demo Gratuita →
+          </button>
+          <p class="text-sm text-white/80 mt-4">
+            ⚡ Respuesta en menos de 2 horas (horario laboral)
+          </p>
+        </form>
+
+        <div
+          class="mt-12 flex flex-wrap justify-center gap-8 text-sm text-white/80"
+        >
+          <div class="flex items-center gap-2">
+            <span>✓</span>
+            <span>Sin compromiso</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>✓</span>
+            <span>7 días de prueba</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>✓</span>
+            <span>Devolución garantizada</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4 gradient-text">IA para PYMEs</h3>
+            <p class="text-gray-400 text-sm">
+              Automatización con Inteligencia Artificial para pequeñas y
+              medianas empresas españolas.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">Demos</h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">Chatbot IA</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Procesador Documentos</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Dashboard Analytics</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">WhatsApp Bot</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition"
+                  >Sistema Predicciones</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">Empresa</h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="#" class="hover:text-white transition">Sobre mí</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Casos de uso</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition">Precios</a>
+              </li>
+              <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">Contacto</h4>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li>📧 lagojorge24@gmail.com</li>
+              <li>📞 +34 618 457 323</li>
+              <li>
+                <a
+                  href="https://linkedin.com/in/jorge-lago-campos"
+                  target="_blank"
+                  class="hover:text-white transition"
+                >
+                  💼 LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Leikymain"
+                  target="_blank"
+                  class="hover:text-white transition"
+                >
+                  💻 GitHub
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm"
+        >
+          <p>&copy; 2024 Jorge Lago Campos. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

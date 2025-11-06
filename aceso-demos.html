@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso a Demos | IA para PYMEs</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50" x-data="demoAccess()">
+    <!-- Header -->
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16"
+      >
+        <a href="/" class="text-2xl font-bold gradient-text">IA para PYMEs</a>
+        <a href="/" class="text-purple-600 font-semibold hover:underline"
+          >← Volver</a
+        >
+      </div>
+    </nav>
+
+    <main
+      class="min-h-screen flex items-center justify-center px-4 pt-24 pb-12"
+    >
+      <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
+        <div class="text-center mb-8">
+          <div class="text-5xl mb-4">🔐</div>
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">Acceso a Demos</h1>
+          <p class="text-gray-600">
+            Introduce tu email y contraseña para obtener tu token de acceso
+          </p>
+        </div>
+
+        <!-- Formulario -->
+        <div x-show="!tokenGenerated">
+          <form @submit.prevent="getToken" class="space-y-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                x-model="email"
+                required
+                placeholder="tu@email.com"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Contraseña de Acceso</label
+              >
+              <input
+                type="password"
+                x-model="password"
+                required
+                placeholder="Contraseña enviada por email"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition"
+              />
+              <p class="text-xs text-gray-500 mt-2">
+                ¿No tienes contraseña?
+                <a href="/#contacto" class="text-purple-600 hover:underline"
+                  >Solicítala aquí</a
+                >
+              </p>
+            </div>
+
+            <div
+              x-show="error"
+              class="bg-red-50 border-l-4 border-red-500 p-4 rounded"
+            >
+              <p class="text-sm text-red-700" x-text="error"></p>
+            </div>
+
+            <button
+              type="submit"
+              :disabled="loading"
+              class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 transition"
+            >
+              <span x-show="!loading">Obtener Token de Acceso</span>
+              <span x-show="loading">Generando...</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Token generado -->
+        <div x-show="tokenGenerated" class="space-y-6">
+          <div class="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+            <h3 class="font-bold text-green-900 mb-2">✅ Token Generado</h3>
+            <p class="text-sm text-green-700 mb-4">
+              Guárdalo y úsalo para acceder a las demos
+            </p>
+            <code
+              x-text="accessToken"
+              class="block text-xs break-all bg-gray-100 p-3 rounded font-mono text-gray-800"
+            ></code>
+            <button
+              @click="copyToken"
+              class="mt-3 w-full bg-purple-600 text-white py-2 rounded text-sm font-semibold hover:bg-purple-700 transition"
+            >
+              <span x-show="!copied">📋 Copiar Token</span>
+              <span x-show="copied">✅ Copiado!</span>
+            </button>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-semibold text-gray-800 mb-2">
+              🚀 Acceder a Demos:
+            </h3>
+            <a
+              href="https://chatbot-demo.railway.app"
+              class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
+              >🤖 Chatbot IA</a
+            >
+            <a
+              href="https://pdf-processor-demo.railway.app"
+              class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
+              >📄 Procesador Documentos</a
+            >
+            <a
+              href="https://analytics-demo.railway.app"
+              class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
+              >📊 Dashboard Analytics</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center text-gray-500 text-sm py-8">
+      © 2024 IA para PYMEs — Desarrollado por Jorge Lago Campos
+    </footer>
+
+    <script>
+      function demoAccess() {
+        return {
+          email: "",
+          password: "",
+          loading: false,
+          error: "",
+          tokenGenerated: false,
+          accessToken: "",
+          copied: false,
+
+          async getToken() {
+            this.loading = true;
+            this.error = "";
+            try {
+              const response = await fetch(
+                "https://api.automapymes.com/auth/get-token",
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    email: this.email,
+                    password: this.password,
+                  }),
+                }
+              );
+              if (!response.ok) throw new Error("Error al generar token");
+              const data = await response.json();
+              this.accessToken = data.access_token;
+              this.tokenGenerated = true;
+            } catch (err) {
+              this.error = err.message;
+            } finally {
+              this.loading = false;
+            }
+          },
+          copyToken() {
+            navigator.clipboard.writeText(this.accessToken);
+            this.copied = true;
+            setTimeout(() => (this.copied = false), 2000);
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

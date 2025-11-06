@@ -29,7 +29,7 @@
     </style>
   </head>
 
-  <body class="bg-gray-50" x-data="demoAccess()">
+  <body class="bg-gray-50 overflow-hidden" x-data="demoAccess()">
     <!-- Header -->
     <nav class="bg-white shadow-sm fixed w-full z-50">
       <div
@@ -42,8 +42,12 @@
       </div>
     </nav>
 
+    <!-- Spacer para compensar la nav fija (h-16 = 4rem) -->
+    <div class="h-16"></div>
+
+    <!-- Área principal ajustada al alto de pantalla menos nav y footer -->
     <main
-      class="min-h-screen flex items-center justify-center px-4 pt-24 pb-12"
+      class="h-[calc(100vh-4rem-3rem)] flex items-center justify-center px-4"
     >
       <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
         <div class="text-center mb-8">
@@ -151,8 +155,11 @@
       </div>
     </main>
 
-    <footer class="text-center text-gray-500 text-sm py-8">
-      © 2024 IA para PYMEs — Desarrollado por Jorge Lago Campos
+    <!-- Footer fijo al fondo (≈3rem de alto con py-3) -->
+    <footer
+      class="fixed bottom-0 left-0 right-0 text-center text-gray-500 text-sm py-3 bg-transparent"
+    >
+      © Automapymes — Desarrollado por Jorge Lago Campos
     </footer>
 
     <script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Acceso a Demos | IA para PYMEs</title>
+    <title>Acceso a Demos | Automapymes</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script
       defer
@@ -49,107 +49,123 @@
     <main
       class="h-[calc(100vh-4rem-3rem)] flex items-center justify-center px-4"
     >
-      <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
-        <div class="text-center mb-8">
-          <div class="text-5xl mb-4">🔐</div>
-          <h1 class="text-3xl font-bold text-gray-800 mb-2">Acceso a Demos</h1>
-          <p class="text-gray-600">
-            Introduce tu email y contraseña para obtener tu token de acceso
-          </p>
-        </div>
+      <div class="max-w-5xl w-full grid md:grid-cols-2 gap-6 items-start">
+        <!-- Card informativa a la izquierda -->
+        <aside class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
+          <h2 class="text-lg font-bold text-blue-900 mb-3">
+            ℹ️ ¿Por qué necesito contraseña?
+          </h2>
+          <ul class="space-y-2 text-sm text-blue-800">
+            <li>• Las demos usan IA de pago (Anthropic)</li>
+            <li>• Limitamos el acceso para controlar costes</li>
+            <li>• Cada token tiene 60 requests gratis</li>
+            <li>• Válido por 3 días</li>
+          </ul>
+        </aside>
 
-        <!-- Formulario -->
-        <div x-show="!tokenGenerated">
-          <form @submit.prevent="getToken" class="space-y-4">
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2"
-                >Email</label
-              >
-              <input
-                type="email"
-                x-model="email"
-                required
-                placeholder="tu@email.com"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2"
-                >Contraseña de Acceso</label
-              >
-              <input
-                type="password"
-                x-model="password"
-                required
-                placeholder="Contraseña enviada por email"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition"
-              />
-              <p class="text-xs text-gray-500 mt-2">
-                ¿No tienes contraseña?
-                <a href="/#contacto" class="text-purple-600 hover:underline"
-                  >Solicítala aquí</a
-                >
-              </p>
-            </div>
-
-            <div
-              x-show="error"
-              class="bg-red-50 border-l-4 border-red-500 p-4 rounded"
-            >
-              <p class="text-sm text-red-700" x-text="error"></p>
-            </div>
-
-            <button
-              type="submit"
-              :disabled="loading"
-              class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 transition"
-            >
-              <span x-show="!loading">Obtener Token de Acceso</span>
-              <span x-show="loading">Generando...</span>
-            </button>
-          </form>
-        </div>
-
-        <!-- Token generado -->
-        <div x-show="tokenGenerated" class="space-y-6">
-          <div class="bg-green-50 border-2 border-green-500 rounded-lg p-6">
-            <h3 class="font-bold text-green-900 mb-2">✅ Token Generado</h3>
-            <p class="text-sm text-green-700 mb-4">
-              Guárdalo y úsalo para acceder a las demos
+        <!-- Formulario / Card derecha -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full p-8">
+          <div class="text-center mb-8">
+            <div class="text-5xl mb-4">🔐</div>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Acceso a Demos</h1>
+            <p class="text-gray-600">
+              Introduce tu email y contraseña para obtener tu token de acceso
             </p>
-            <code
-              x-text="accessToken"
-              class="block text-xs break-all bg-gray-100 p-3 rounded font-mono text-gray-800"
-            ></code>
-            <button
-              @click="copyToken"
-              class="mt-3 w-full bg-purple-600 text-white py-2 rounded text-sm font-semibold hover:bg-purple-700 transition"
-            >
-              <span x-show="!copied">📋 Copiar Token</span>
-              <span x-show="copied">✅ Copiado!</span>
-            </button>
           </div>
 
-          <div class="bg-gray-50 p-6 rounded-lg">
-            <h3 class="font-semibold text-gray-800 mb-2">
-              🚀 Acceder a Demos:
-            </h3>
-            <a
-              href="https://chatbot-demo.railway.app"
-              class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
-              >🤖 Chatbot IA</a
-            >
-            <a
-              href="https://pdf-processor-demo.railway.app"
-              class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
-              >📄 Procesador Documentos</a
-            >
-            <a
-              href="https://analytics-demo.railway.app"
-              class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
-              >📊 Dashboard Analytics</a
-            >
+          <!-- Formulario -->
+          <div x-show="!tokenGenerated">
+            <form @submit.prevent="getToken" class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  x-model="email"
+                  required
+                  placeholder="tu@email.com"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Contraseña de Acceso</label
+                >
+                <input
+                  type="password"
+                  x-model="password"
+                  required
+                  placeholder="Contraseña enviada por email"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition"
+                />
+                <p class="text-xs text-gray-500 mt-2">
+                  ¿No tienes contraseña?
+                  <a href="/#contacto" class="text-purple-600 hover:underline"
+                    >Solicítala aquí</a
+                  >
+                </p>
+              </div>
+
+              <div
+                x-show="error"
+                class="bg-red-50 border-l-4 border-red-500 p-4 rounded"
+              >
+                <p class="text-sm text-red-700" x-text="error"></p>
+              </div>
+
+              <button
+                type="submit"
+                :disabled="loading"
+                class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 transition"
+              >
+                <span x-show="!loading">Obtener Token de Acceso</span>
+                <span x-show="loading">Generando...</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Token generado -->
+          <div x-show="tokenGenerated" class="space-y-6">
+            <div class="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+              <h3 class="font-bold text-green-900 mb-2">✅ Token Generado</h3>
+              <p class="text-sm text-green-700 mb-4">
+                Guárdalo y úsalo para acceder a las demos
+              </p>
+              <code
+                x-text="accessToken"
+                class="block text-xs break-all bg-gray-100 p-3 rounded font-mono text-gray-800"
+              ></code>
+              <button
+                @click="copyToken"
+                class="mt-3 w-full bg-purple-600 text-white py-2 rounded text-sm font-semibold hover:bg-purple-700 transition"
+              >
+                <span x-show="!copied">📋 Copiar Token</span>
+                <span x-show="copied">✅ Copiado!</span>
+              </button>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="font-semibold text-gray-800 mb-2">
+                🚀 Acceder a Demos:
+              </h3>
+              <a
+                href="https://chatbot-demo.railway.app"
+                class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
+                >🤖 Chatbot IA</a
+              >
+              <a
+                href="https://pdf-processor-demo.railway.app"
+                class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
+                >📄 Procesador Documentos</a
+              >
+              <a
+                href="https://analytics-demo.railway.app"
+                class="block border-2 border-gray-200 rounded-lg p-3 hover:border-purple-500 transition mb-2"
+                >📊 Dashboard Analytics</a
+              >
+            </div>
           </div>
         </div>
       </div>

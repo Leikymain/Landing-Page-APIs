@@ -424,14 +424,29 @@
           },
 
           // ---------- Función helper para calcular tiempo restante ----------
-          formatRemainingTime(expiresAt) {
-            const expiresMs = Date.parse(expiresAt);
-            if (isNaN(expiresMs)) return "fecha desconocida";
+          parseISOtoDate(isoString) {
+            // Esto asegura que cualquier offset se interprete correctamente
+            const parts = isoString.match(
+              /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-]\d{2}):(\d{2})$/
+            );
+            if (!parts) return new Date(NaN); // fecha inválida
 
-            let diffMs = expiresMs - Date.now();
-            if (diffMs <= 0) {
-              return "Expirado";
-            }
+            const [_, y, m, d, h, min, s, tzH, tzM] = parts.map(Number);
+
+            // Crear fecha en UTC
+            const date = new Date(Date.UTC(y, m - 1, d, h, min, s));
+            const offset = tzH * 60 + tzM;
+            // Restar offset en minutos
+            date.setUTCMinutes(date.getUTCMinutes() - offset);
+            return date;
+          },
+
+          formatRemainingTime(expiresAt) {
+            const expiresDate = parseISOtoDate(expiresAt);
+            if (isNaN(expiresDate.getTime())) return "fecha desconocida";
+
+            let diffMs = expiresDate - new Date();
+            if (diffMs <= 0) return "Expirado";
 
             const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
             const diffHours = Math.floor(
@@ -440,12 +455,6 @@
             const diffMinutes = Math.floor(
               (diffMs % (1000 * 60 * 60)) / (1000 * 60)
             );
-
-            // Si la diferencia es menor a 1 minuto, mostrar la fecha completa
-            if (diffDays === 0 && diffHours === 0 && diffMinutes === 0) {
-              const expiresDate = new Date(expiresMs);
-              return `Hasta: ${expiresDate.toLocaleString()}`;
-            }
 
             return `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
           },

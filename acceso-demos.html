@@ -425,11 +425,13 @@
 
           // ---------- Función helper para calcular tiempo restante ----------
           formatRemainingTime(expiresAt) {
-            const expiresDate = new Date(expiresAt);
-            if (isNaN(expiresDate.getTime())) return "desconocido";
+            const expiresMs = Date.parse(expiresAt);
+            if (isNaN(expiresMs)) return "fecha desconocida";
 
-            let diffMs = expiresDate - new Date();
-            if (diffMs < 0) diffMs = 0;
+            let diffMs = expiresMs - Date.now();
+            if (diffMs <= 0) {
+              return "Expirado";
+            }
 
             const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
             const diffHours = Math.floor(
@@ -438,6 +440,12 @@
             const diffMinutes = Math.floor(
               (diffMs % (1000 * 60 * 60)) / (1000 * 60)
             );
+
+            // Si la diferencia es menor a 1 minuto, mostrar la fecha completa
+            if (diffDays === 0 && diffHours === 0 && diffMinutes === 0) {
+              const expiresDate = new Date(expiresMs);
+              return `Hasta: ${expiresDate.toLocaleString()}`;
+            }
 
             return `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
           },

@@ -500,7 +500,7 @@
               this.requestsAvailable = data.requests_available;
 
               // Calcular tiempo restante desde la fecha real
-              const expiresDate = new Date(data.expires_in_days); // ahora es fecha real
+              const expiresDate = new Date(data.expires_at); // ahora es fecha real
               const diffMs = expiresDate - new Date();
               const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
               const diffHours = Math.floor(

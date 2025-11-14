@@ -516,7 +516,7 @@
 
               // ✔ Login OK
               this.accessToken = data.access_token;
-              this.requestsAvailable = data.requests_available;
+              this.requestsAvailable = data.requests_left;
 
               // Calcular tiempo restante desde expires_at
               this.expiresTime = this.formatRemainingTime(data.expires_at);

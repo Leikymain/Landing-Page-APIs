@@ -442,7 +442,7 @@
           },
 
           formatRemainingTime(expiresAt) {
-            const expiresDate = parseISOtoDate(expiresAt);
+            const expiresDate = this.parseISOtoDate(expiresAt);
             if (isNaN(expiresDate.getTime())) return "fecha desconocida";
 
             let diffMs = expiresDate - new Date();

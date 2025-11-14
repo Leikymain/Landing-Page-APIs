@@ -403,7 +403,7 @@
           tokenGenerated: false,
           accessToken: "",
           requestsAvailable: 0,
-          expiresTime: "", // ahora usamos esta para mostrar días, horas, minutos
+          expiresTime: "", // mostrar días, horas, minutos
           copied: false,
 
           // URL del AuthService
@@ -421,6 +421,25 @@
             this.isRegisterMode = false;
             this.error = "";
             this.success = "";
+          },
+
+          // Función helper para calcular tiempo restante
+          formatRemainingTime(expiresAt) {
+            const expiresDate = new Date(expiresAt);
+            if (isNaN(expiresDate.getTime())) return "desconocido";
+
+            let diffMs = expiresDate - new Date();
+            if (diffMs < 0) diffMs = 0;
+
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor(
+              (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const diffMinutes = Math.floor(
+              (diffMs % (1000 * 60 * 60)) / (1000 * 60)
+            );
+
+            return `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
           },
 
           // Registro de nuevo usuario
@@ -499,24 +518,14 @@
               this.accessToken = data.access_token;
               this.requestsAvailable = data.requests_available;
 
-              // Calcular tiempo restante desde la fecha real
-              const expiresDate = new Date(data.expires_at); // ⚠️ Aquí va expires_at
-              const diffMs = expiresDate - new Date();
-              const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-              const diffHours = Math.floor(
-                (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-              );
-              const diffMinutes = Math.floor(
-                (diffMs % (1000 * 60 * 60)) / (1000 * 60)
-              );
-
-              this.expiresTime = `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
+              // Calcular tiempo restante desde expires_at
+              this.expiresTime = this.formatRemainingTime(data.expires_at);
               this.tokenGenerated = true;
 
               // Guardar en localStorage
               localStorage.setItem("demo_token", data.access_token);
               localStorage.setItem("demo_email", this.email);
-              localStorage.setItem("demo_expires", expiresDate.toISOString());
+              localStorage.setItem("demo_expires", data.expires_at);
             } catch (err) {
               this.error = err.message;
             } finally {
@@ -552,42 +561,24 @@
             const savedExpires = localStorage.getItem("demo_expires");
 
             if (savedToken && savedEmail && savedExpires) {
-              const expiresDate = new Date(savedExpires);
+              this.email = savedEmail;
+              this.accessToken = savedToken;
 
-              if (expiresDate > new Date()) {
-                this.email = savedEmail;
-                this.accessToken = savedToken;
+              // Calcular tiempo restante
+              this.expiresTime = this.formatRemainingTime(savedExpires);
 
-                // Calcular tiempo restante
-                const diffMs = expiresDate - new Date();
-                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                const diffHours = Math.floor(
-                  (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                );
-                const diffMinutes = Math.floor(
-                  (diffMs % (1000 * 60 * 60)) / (1000 * 60)
-                );
+              // Actualizar requests disponibles desde backend
+              fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
+                .then((res) => res.json())
+                .then((data) => {
+                  this.requestsAvailable = data.requests_left;
+                })
+                .catch((err) => {
+                  console.error(err);
+                  this.requestsAvailable = 0;
+                });
 
-                this.expiresTime = `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
-
-                // Actualizar requests disponibles
-                fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
-                  .then((res) => res.json())
-                  .then((data) => {
-                    this.requestsAvailable = data.requests_left;
-                  })
-                  .catch((err) => {
-                    console.error("Error fetching stats:", err);
-                    this.requestsAvailable = 0;
-                  });
-
-                this.tokenGenerated = true;
-              } else {
-                // Token expirado
-                localStorage.removeItem("demo_token");
-                localStorage.removeItem("demo_email");
-                localStorage.removeItem("demo_expires");
-              }
+              this.tokenGenerated = true;
             }
           },
         };

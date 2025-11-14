@@ -500,7 +500,7 @@
               this.requestsAvailable = data.requests_available;
 
               // Calcular tiempo restante desde la fecha real
-              const expiresDate = new Date(data.expires_at); // ahora es fecha real
+              const expiresDate = new Date(data.expires_at); // ⚠️ Aquí va expires_at
               const diffMs = expiresDate - new Date();
               const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
               const diffHours = Math.floor(
@@ -513,7 +513,7 @@
               this.expiresTime = `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
               this.tokenGenerated = true;
 
-              // ✔ Guardar en localStorage
+              // Guardar en localStorage
               localStorage.setItem("demo_token", data.access_token);
               localStorage.setItem("demo_email", this.email);
               localStorage.setItem("demo_expires", expiresDate.toISOString());
@@ -555,11 +555,10 @@
               const expiresDate = new Date(savedExpires);
 
               if (expiresDate > new Date()) {
-                // Token válido
                 this.email = savedEmail;
                 this.accessToken = savedToken;
 
-                // Calcular tiempo restante en días, horas y minutos
+                // Calcular tiempo restante
                 const diffMs = expiresDate - new Date();
                 const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
                 const diffHours = Math.floor(
@@ -571,7 +570,7 @@
 
                 this.expiresTime = `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
 
-                // ⚠️ RequestsAvailable: hacer fetch al backend para obtener el número real
+                // Actualizar requests disponibles
                 fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
                   .then((res) => res.json())
                   .then((data) => {

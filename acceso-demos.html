@@ -581,10 +581,9 @@
               this.email = savedEmail;
               this.accessToken = savedToken;
 
-              // Calcular tiempo restante
+              // Llama a tu método con this
               this.expiresTime = this.formatRemainingTime(savedExpires);
 
-              // Actualizar requests disponibles desde backend
               fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
                 .then((res) => res.json())
                 .then((data) => {

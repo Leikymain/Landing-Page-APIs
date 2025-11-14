@@ -403,7 +403,7 @@
           tokenGenerated: false,
           accessToken: "",
           requestsAvailable: 0,
-          expiresInDays: 0,
+          expiresTime: "", // ahora usamos esta para mostrar días, horas, minutos
           copied: false,
 
           // URL del AuthService
@@ -434,19 +434,14 @@
                 `${this.AUTH_SERVICE_URL}/auth/register`,
                 {
                   method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: this.email,
-                  }),
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email: this.email }),
                 }
               );
 
               const data = await response.json();
 
               if (!response.ok) {
-                // Si el email ya existe (409)
                 if (response.status === 409) {
                   this.error =
                     "Este email ya está registrado. Cambiando a inicio de sesión...";
@@ -458,11 +453,8 @@
                 throw new Error(data.detail || "Error al solicitar acceso");
               }
 
-              // Éxito
               this.success =
                 "¡Contraseña enviada a tu email! Revisa tu bandeja de entrada (y spam).";
-
-              // Esperar 3 segundos y cambiar a login
               setTimeout(() => {
                 this.showLogin();
                 this.success = "";
@@ -474,7 +466,6 @@
             }
           },
 
-          // Login de usuario existente
           // Login de usuario existente
           async login() {
             this.loading = true;
@@ -506,21 +497,26 @@
 
               // ✔ Login OK
               this.accessToken = data.access_token;
-              this.requestsAvailable = data.requests_available; // ← CORREGIDO
-              this.expiresInDays = data.expires_in_days; // ← CORREGIDO
+              this.requestsAvailable = data.requests_available;
+
+              // Calcular tiempo restante desde la fecha real
+              const expiresDate = new Date(data.expires_in_days); // ahora es fecha real
+              const diffMs = expiresDate - new Date();
+              const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+              const diffHours = Math.floor(
+                (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+              );
+              const diffMinutes = Math.floor(
+                (diffMs % (1000 * 60 * 60)) / (1000 * 60)
+              );
+
+              this.expiresTime = `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
               this.tokenGenerated = true;
 
               // ✔ Guardar en localStorage
               localStorage.setItem("demo_token", data.access_token);
               localStorage.setItem("demo_email", this.email);
-
-              const expirationDate = new Date(
-                Date.now() + data.expires_in_days * 24 * 60 * 60 * 1000
-              );
-              localStorage.setItem(
-                "demo_expires",
-                expirationDate.toISOString()
-              );
+              localStorage.setItem("demo_expires", expiresDate.toISOString());
             } catch (err) {
               this.error = err.message;
             } finally {
@@ -545,6 +541,8 @@
             this.error = "";
             this.success = "";
             this.isRegisterMode = false;
+            this.requestsAvailable = 0;
+            this.expiresTime = "";
           },
 
           // Al cargar, verificar si hay token guardado
@@ -561,12 +559,28 @@
                 this.email = savedEmail;
                 this.accessToken = savedToken;
 
-                this.expiresInDays = Math.ceil(
-                  (expiresDate - new Date()) / (1000 * 60 * 60 * 24)
+                // Calcular tiempo restante en días, horas y minutos
+                const diffMs = expiresDate - new Date();
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                const diffHours = Math.floor(
+                  (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                );
+                const diffMinutes = Math.floor(
+                  (diffMs % (1000 * 60 * 60)) / (1000 * 60)
                 );
 
-                // ⚠️ RequestsAvailable NO puede saberse sin consultar stats
-                // Puedes hacer fetch aquí si quieres.
+                this.expiresTime = `${diffDays} días ${diffHours} horas ${diffMinutes} minutos`;
+
+                // ⚠️ RequestsAvailable: hacer fetch al backend para obtener el número real
+                fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
+                  .then((res) => res.json())
+                  .then((data) => {
+                    this.requestsAvailable = data.requests_left;
+                  })
+                  .catch((err) => {
+                    console.error("Error fetching stats:", err);
+                    this.requestsAvailable = 0;
+                  });
 
                 this.tokenGenerated = true;
               } else {

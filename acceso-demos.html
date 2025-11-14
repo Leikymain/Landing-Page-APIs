@@ -533,7 +533,7 @@
 
               // ✔ Login OK
               this.accessToken = data.access_token;
-              this.requestsAvailable = data.requests_left;
+              this.requestsAvailable = data.requests_available;
 
               // Calcular tiempo restante desde expires_at
               this.expiresTime = this.formatRemainingTime(data.expires_at);
@@ -587,7 +587,7 @@
               fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
                 .then((res) => res.json())
                 .then((data) => {
-                  this.requestsAvailable = data.requests_left;
+                  this.requestsAvailable = data.requests_available;
                 })
                 .catch((err) => {
                   console.error(err);

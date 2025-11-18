@@ -13,6 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/svg+xml" href="/favicon_automapymes.svg" />
     <style>
       body {
         font-family: "Inter", sans-serif;
@@ -45,10 +46,60 @@
           padding: 1rem;
         }
       }
+
+      @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+          overflow: auto;
+        }
+
+        .tablet-main {
+          padding-top: 6rem;
+          padding-bottom: 4rem;
+        }
+
+        .tablet-form-grid {
+          grid-template-columns: 1fr;
+          max-width: 760px;
+          gap: 2.5rem;
+        }
+
+        .tablet-form-grid > * {
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .tablet-form-card {
+          padding: 2.5rem;
+        }
+
+        .tablet-token-layout {
+          grid-template-columns: 1fr;
+          padding: 2rem;
+          gap: 1.75rem;
+        }
+
+        .tablet-token-layout .left-panel,
+        .tablet-token-layout .right-panel {
+          width: 100%;
+          max-width: 760px;
+          margin: 0 auto;
+        }
+
+        .tablet-token-layout .right-panel a {
+          padding: 1.25rem;
+        }
+
+        .tablet-footer {
+          position: static;
+          height: auto;
+          padding: 2rem 1rem;
+          background: transparent;
+        }
+      }
     </style>
   </head>
 
-  <body class="bg-gray-50 md:overflow-hidden" x-data="demoAccess()">
+  <body class="bg-gray-50 lg:overflow-hidden" x-data="demoAccess()">
     <!-- Header -->
     <nav class="bg-white shadow-sm fixed w-full z-50">
       <div
@@ -66,12 +117,12 @@
 
     <!-- Área principal: en móvil scroll normal; en escritorio encaje exacto -->
     <main
-      class="px-4 pt-24 pb-16 md:pt-0 md:pb-0 md:h-[calc(100vh-4rem-3rem)] md:flex md:items-center md:justify-center"
+      class="px-4 pt-24 pb-16 lg:pt-0 lg:pb-0 lg:h-[calc(100vh-4rem-3rem)] lg:flex lg:items-center lg:justify-center tablet-main"
     >
       <!-- Layout para formularios (antes de generar token) -->
       <div
         x-show="!tokenGenerated"
-        class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-8 items-start md:items-center"
+        class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 items-start lg:items-center tablet-form-grid"
       >
         <!-- Card informativa a la izquierda -->
         <aside
@@ -110,7 +161,9 @@
         </aside>
 
         <!-- Formulario / Card derecha -->
-        <div class="bg-white rounded-2xl shadow-2xl w-full p-6 md:p-8">
+        <div
+          class="bg-white rounded-2xl shadow-2xl w-full p-6 md:p-8 tablet-form-card"
+        >
           <!-- MODO: Solicitar Acceso (Registro) -->
           <div x-show="isRegisterMode && !tokenGenerated">
             <div class="text-center mb-8">
@@ -240,7 +293,7 @@
       </div>
 
       <!-- Layout para token generado (dos columnas en escritorio) -->
-      <div x-show="tokenGenerated" class="container">
+      <div x-show="tokenGenerated" class="container tablet-token-layout">
         <!-- Panel izquierdo: Token -->
         <div class="left-panel space-y-6">
           <div class="bg-green-50 border-2 border-green-500 rounded-lg p-6">
@@ -385,7 +438,7 @@
 
     <!-- Footer: fijo solo en escritorio, normal en móvil -->
     <footer
-      class="text-center text-gray-500 text-sm py-8 md:fixed md:bottom-0 md:left-0 md:right-0 md:h-12 md:flex md:items-center md:justify-center md:bg-transparent"
+      class="text-center text-gray-500 text-sm py-8 lg:fixed lg:bottom-0 lg:left-0 lg:right-0 lg:h-12 lg:flex lg:items-center lg:justify-center lg:bg-transparent tablet-footer"
     >
       © Automapymes – Desarrollado por Jorge Lago Campos
     </footer>

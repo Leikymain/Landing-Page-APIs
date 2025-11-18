@@ -640,7 +640,7 @@
               fetch(`${this.AUTH_SERVICE_URL}/auth/stats?token=${savedToken}`)
                 .then((res) => res.json())
                 .then((data) => {
-                  this.requestsAvailable = data.requests_available;
+                  this.requestsAvailable = data.requests_left;
                 })
                 .catch((err) => {
                   console.error(err);
